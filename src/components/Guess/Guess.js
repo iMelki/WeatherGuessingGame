@@ -1,12 +1,13 @@
 import React from 'react';
 
-const Guess = ({ cities, guessArr, realCTemps, index }) => {
+const Guess = ({ guessArr, realCTemps, index }) => {
+  let correct = Math.abs(guessArr[index]-realCTemps[index]) <= 5 ;
   return (
-    <div>
-      <div className='white f1'>
+    <div className={"b "+(correct ? "dark-green" : "red")}>
+      <div className='f1'>
         {`${guessArr[index]}`}
       </div>
-      <div className='white f3'>
+      <div className='f3'>
         {`was ${realCTemps[index]}`}
       </div>
     </div>

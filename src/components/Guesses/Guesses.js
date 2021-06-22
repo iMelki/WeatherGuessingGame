@@ -5,7 +5,7 @@ import Guess from '../Guess/Guess';
 const Guesses = ({ currIndex, guessesArr, realCityTemps, citiesArr }) => {
   let guessComps = [];
   for (var i = 0; i <= currIndex; i++) {
-    guessComps.push(<Guess cities={citiesArr} guessArr={guessesArr} realCTemps={realCityTemps} index={i}/>)
+    guessComps.push(<Guess key={i} cities={citiesArr} guessArr={guessesArr} realCTemps={realCityTemps} index={i}/>)
   }
   return (
     <div>
