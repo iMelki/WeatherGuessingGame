@@ -2,14 +2,14 @@ import React from 'react';
 import './Guesses.css';
 import Guess from '../Guess/Guess';
 
-const Guesses = ({ guessesArr, realCityTemps }) => {
+const Guesses = ({ currIndex, guessesArr, realCityTemps, citiesArr }) => {
+  let guessComps = [];
+  for (var i = 0; i <= currIndex; i++) {
+    guessComps.push(<Guess cities={citiesArr} guessArr={guessesArr} realCTemps={realCityTemps} index={i}/>)
+  }
   return (
     <div>
-      <Guess guessArr={guessesArr} realCTemps={realCityTemps} index={0}/>
-      <Guess guessArr={guessesArr} realCTemps={realCityTemps} index={1}/>
-      <Guess guessArr={guessesArr} realCTemps={realCityTemps} index={2}/>
-      <Guess guessArr={guessesArr} realCTemps={realCityTemps} index={3}/>
-      <Guess guessArr={guessesArr} realCTemps={realCityTemps} index={4}/>
+      {guessComps}
     </div>
   );
 }

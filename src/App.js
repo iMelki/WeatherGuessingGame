@@ -51,7 +51,7 @@ class App extends Component {
       .then(response => {
         let cityTemp = response.main.temp;
         this.setState(prevState => ({
-          guesses: [...prevState.realTemps, cityTemp]
+          realTemps: [...prevState.realTemps, cityTemp]
         }));
         this.setState({nCurrIndex: this.state.nCurrIndex+1});
       })
@@ -71,7 +71,7 @@ class App extends Component {
                 onInputChange={this.onInputChange}
                 onButtonSubmit={this.onButtonSubmit}
               />
-              <Guesses guessesArr={guesses} realCityTemps={realTemps} />
+              <Guesses currIndex={nCurrIndex-1} guessesArr={guesses} realCityTemps={realTemps} citiesArr={cityNames} />
           </div>
       </div>
     );

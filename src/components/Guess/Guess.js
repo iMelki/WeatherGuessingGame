@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Guess = ({ guessArr, realCTemps, index }) => {
+const Guess = ({ cities, guessArr, realCTemps, index }) => {
   return (
     <div>
       <div className='white f1'>
