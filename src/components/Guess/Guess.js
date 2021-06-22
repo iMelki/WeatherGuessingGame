@@ -4,7 +4,7 @@ const Guess = ({ guessArr, realCTemps, index }) => {
   let correct = Math.abs(guessArr[index]-realCTemps[index]) <= 5 ;
   return (
     <div className={"b "+(correct ? "dark-green" : "red")}>
-      <div className='f1'>
+      <div className='f2'>
         {`${guessArr[index]}`}
       </div>
       <div className='f3'>

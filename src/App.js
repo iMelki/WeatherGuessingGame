@@ -60,21 +60,47 @@ class App extends Component {
 
   render() {
     const { nCurrIndex, guesses, realTemps } = this.state;
-    return (
-      <div className="App">
-         
-          <div>
-              <CurrentCity
-                cityName={cityNames[nCurrIndex]}
-              />
-              <GuessingForm
-                onInputChange={this.onInputChange}
-                onButtonSubmit={this.onButtonSubmit}
-              />
-              <Guesses currIndex={nCurrIndex-1} guessesArr={guesses} realCityTemps={realTemps} citiesArr={cityNames} />
+    if (nCurrIndex<5){
+      return (
+        <div className="App">
+            <div>
+                <CurrentCity
+                  cityName={cityNames[nCurrIndex]}
+                />
+                <GuessingForm
+                  onInputChange={this.onInputChange}
+                  onButtonSubmit={this.onButtonSubmit}
+                />
+                <Guesses currIndex={nCurrIndex-1} guessesArr={guesses} realCityTemps={realTemps} citiesArr={cityNames} />
+            </div>
+        </div>
+      );
+    }else{
+      let won = false;
+      let count = 0;
+      for (let i = 0; i < this.state.realTemps.length; i++) {
+        if (Math.abs(guesses[i]-realTemps[i]) <= 5){
+          count++;
+        }
+      }
+      if (count>2){
+        return(
+          <div className="">
+            <CurrentCity
+              cityName={"YOU WON !"}
+            />
           </div>
-      </div>
-    );
+        );
+      }else{
+        return(
+          <div className="">
+            <CurrentCity
+              cityName={"YOU LOST !"}
+            />
+          </div>
+        );
+      }
+    }
   }
 }
 
