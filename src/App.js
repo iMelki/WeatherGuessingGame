@@ -58,12 +58,14 @@ class App extends Component {
       .catch(err => console.log(err));
   }
 
-  render() {
+  render1() {
     const { nCurrIndex, guesses, realTemps } = this.state;
+    let pageRows = [];
     if (nCurrIndex<5){
       return (
         <div className="App">
             <div>
+              <div>
                 <CurrentCity
                   cityName={cityNames[nCurrIndex]}
                 />
@@ -71,7 +73,8 @@ class App extends Component {
                   onInputChange={this.onInputChange}
                   onButtonSubmit={this.onButtonSubmit}
                 />
-                <Guesses currIndex={nCurrIndex-1} guessesArr={guesses} realCityTemps={realTemps} citiesArr={cityNames} />
+              </div>
+              <Guesses currIndex={nCurrIndex-1} guessesArr={guesses} realCityTemps={realTemps} citiesArr={cityNames} />
             </div>
         </div>
       );
@@ -102,6 +105,57 @@ class App extends Component {
       }
     }
   }
+
+  
+  render() {
+    const { nCurrIndex, guesses, realTemps } = this.state;
+    let pageRows = [];
+    if (nCurrIndex<5){
+      pageRows.push(<div>
+        <CurrentCity
+          cityName={cityNames[nCurrIndex]}
+        />
+        <GuessingForm
+          onInputChange={this.onInputChange}
+          onButtonSubmit={this.onButtonSubmit}
+        />
+      </div>);
+    }else{
+      let won = false;
+      let count = 0;
+      for (let i = 0; i < this.state.realTemps.length; i++) {
+        if (Math.abs(guesses[i]-realTemps[i]) <= 5){
+          count++;
+        }
+      }
+      if (count>2){
+        pageRows.push(
+          <div className="">
+            <CurrentCity
+              cityName={"YOU WON !"}
+            />
+          </div>
+        );
+      }else{
+        pageRows.push(
+          <div className="">
+            <CurrentCity
+              cityName={"YOU LOST !"}
+            />
+          </div>
+        );
+      }
+    }
+    return (
+      <div className="App">
+          <div>
+            {pageRows}
+            <Guesses currIndex={nCurrIndex-1} guessesArr={guesses} realCityTemps={realTemps} citiesArr={cityNames} />
+          </div>
+      </div>
+    );
+  }
+
 }
 
 export default App;
